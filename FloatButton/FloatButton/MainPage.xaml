@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FloatButton.MainPage"
+             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:extensions="http://xamarin.com/schemas/2020/toolkit">
+
+    <Grid>
+        <CarouselView ItemsSource="{Binding MyImages}" Margin="20">
+            <CarouselView.EmptyView>
+                <Grid>
+                    <Label Text="No item found, Tap the (+) sign to add an item" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </Grid>
+            </CarouselView.EmptyView>
+        </CarouselView>
+        <pv:PancakeView HorizontalOptions="End" VerticalOptions="End" Margin="30" CornerRadius="40" Padding="15">
+            <pv:PancakeView.BackgroundGradientStops>
+                <pv:GradientStopCollection>
+                    <pv:GradientStop Color="LightBlue" Offset="0" />
+                    <pv:GradientStop Color="SlateBlue" Offset="1" />
+                </pv:GradientStopCollection>
+            </pv:PancakeView.BackgroundGradientStops>
+            <extensions:Expander Rotation="180" HorizontalOptions="Start" VerticalOptions="End"> <!--This program is apparently quite an original way to utilize the expander element-->
+                <extensions:Expander.Header>
+                    <Image Source="add.png" WidthRequest="30" HeightRequest="30" Rotation="180"> <!--This program essentially swaps 1 icon for another ('+' to 'x')-->
+                        <Image.Triggers> <!--Look further into triggers-->
+                            <DataTrigger TargetType="Image" 
+                                         Binding="{Binding Source={RelativeSource AncestorType={x:Type extensions:Expander}}, Path=IsExpanded}"
+                                         Value="True">
+                                <Setter Property="Source" Value="search.png"/> <!--Setting the new property-->
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                </extensions:Expander.Header>
+                <StackLayout Spacing="30" Margin="0,20">
+                    <ImageButton Source="add.png" WidthRequest="30" HeightRequest="30" Rotation="180" BackgroundColor="Transparent" />
+                    <ImageButton Source="add.png" WidthRequest="30" HeightRequest="30" Rotation="180" BackgroundColor="Transparent" />
+                    <ImageButton Source="add.png" WidthRequest="30" HeightRequest="30" Rotation="180" BackgroundColor="Transparent" />
+                </StackLayout>
+            </extensions:Expander>
+        </pv:PancakeView>
+    </Grid>
+
+</ContentPage>
